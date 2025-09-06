@@ -2,7 +2,7 @@ import 'package:bookly/core/utils/assets_data.dart';
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/presentation/view_models/best_seller_model.dart';
 import 'package:bookly/features/home/presentation/views/widgets/best_seller_widget.dart';
-import 'package:bookly/features/home/presentation/views/widgets/custom_app_bar.dart';
+import 'package:bookly/features/home/presentation/views/widgets/home_app_bar.dart';
 import 'package:bookly/features/home/presentation/views/widgets/horizontal_books_list_view_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +43,7 @@ class HomeViewBody extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 15),
-          CustomAppBar(),
+          HomeAppBar(),
           SizedBox(height: 15),
           Expanded(
             child: CustomScrollView(

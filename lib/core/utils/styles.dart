@@ -32,9 +32,9 @@ abstract class Styles {
     fontSize: 14,
     fontWeight: FontWeight.w400,
   );
-  static TextStyle montserratBold15 = GoogleFonts.montserrat(
-    color: const Color(0xFFFFFFFF),
-    fontSize: 15,
+  static TextStyle montserratBold16 = GoogleFonts.montserrat(
+    color: Colors.black,
+    fontSize: 16,
     fontWeight: FontWeight.w700,
   );
   static TextStyle montserratBold20 = GoogleFonts.montserrat(
