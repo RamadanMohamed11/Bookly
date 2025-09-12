@@ -14,15 +14,24 @@ class FeaturedBooksListViewWidget extends StatelessWidget {
       builder: (context, state) {
         if (state is FeaturedBooksSuccess) {
           return SizedBox(
-            height: 230,
+            height: 205,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: AssetsData.books.length,
               itemBuilder: (context, index) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.network(
-                    state.books[index].volumeInfo.imageLinks.thumbnail,
+                  padding: EdgeInsets.only(
+                    right: state.books[index] != state.books.last ? 15 : 0,
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: SizedBox(
+                      width: 150,
+                      child: Image.network(
+                        state.books[index].volumeInfo.imageLinks.thumbnail,
+                        fit: BoxFit.fitHeight,
+                      ),
+                    ),
                   ),
                 );
               },

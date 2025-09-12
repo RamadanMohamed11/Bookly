@@ -21,7 +21,7 @@ class PriceAndFreePreviewWidget extends StatelessWidget {
               ),
             ),
             child: Text(
-              "price",
+              "Free",
               style: Styles.montserratBold16,
               textAlign: TextAlign.center,
             ),
@@ -38,7 +38,7 @@ class PriceAndFreePreviewWidget extends StatelessWidget {
               ),
             ),
             child: Text(
-              "Free preview",
+              "Download",
               style: Styles.gilroyBold16,
               textAlign: TextAlign.center,
             ),

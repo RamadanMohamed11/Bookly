@@ -7,9 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BestSellerSliverList extends StatelessWidget {
-  const BestSellerSliverList({super.key, required this.bestSellerModels});
-
-  final List<BestSellerModel> bestSellerModels;
+  const BestSellerSliverList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +17,11 @@ class BestSellerSliverList extends StatelessWidget {
           return SliverList(
             delegate: SliverChildBuilderDelegate((context, index) {
               return Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
+                padding: const EdgeInsets.only(
+                  bottom: 20.0,
+                  left: 30,
+                  right: 30,
+                ),
                 child: BestSellerWidget(bookModel: state.booksList[index]),
               );
             }, childCount: state.booksList.length),

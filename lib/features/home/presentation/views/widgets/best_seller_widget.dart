@@ -16,11 +16,15 @@ class BestSellerWidget extends StatelessWidget {
       },
       child: Row(
         children: [
-          SizedBox(
-            width: 70,
-            child: Image.network(
-              bookModel.volumeInfo.imageLinks.thumbnail,
-              fit: BoxFit.fitHeight,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: SizedBox(
+              height: 110,
+              width: 80,
+              child: Image.network(
+                bookModel.volumeInfo.imageLinks.thumbnail,
+                fit: BoxFit.fitHeight,
+              ),
             ),
           ),
           SizedBox(width: 30),
@@ -44,7 +48,7 @@ class BestSellerWidget extends StatelessWidget {
                 SizedBox(width: 5),
                 Row(
                   children: [
-                    Text("price", style: Styles.montserratBold20),
+                    Text("Free", style: Styles.montserratBold20),
                     Spacer(),
                     Icon(Icons.star, color: Color(0xffFFDD4F)),
                     SizedBox(width: 4.2),
