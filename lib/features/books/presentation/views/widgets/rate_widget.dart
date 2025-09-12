@@ -3,9 +3,7 @@ import 'package:bookly/features/home/presentation/view_models/best_seller_model.
 import 'package:flutter/material.dart';
 
 class RateWidget extends StatelessWidget {
-  const RateWidget({super.key, required this.bestSellerModel});
-
-  final BestSellerModel bestSellerModel;
+  const RateWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,9 +11,9 @@ class RateWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Icon(Icons.star, color: Color(0xffFFDD4F)),
-        Text(bestSellerModel.rating, style: Styles.montserratMedium16),
+        Text("rate", style: Styles.montserratMedium16),
         SizedBox(width: 7),
-        Text(bestSellerModel.reviews, style: Styles.montserratRegular14),
+        Text("reviews", style: Styles.montserratRegular14),
       ],
     );
   }

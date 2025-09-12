@@ -3,9 +3,7 @@ import 'package:bookly/features/home/presentation/view_models/best_seller_model.
 import 'package:flutter/material.dart';
 
 class PriceAndFreePreviewWidget extends StatelessWidget {
-  const PriceAndFreePreviewWidget({super.key, required this.bestSellerModel});
-
-  final BestSellerModel bestSellerModel;
+  const PriceAndFreePreviewWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +21,7 @@ class PriceAndFreePreviewWidget extends StatelessWidget {
               ),
             ),
             child: Text(
-              bestSellerModel.price,
+              "price",
               style: Styles.montserratBold16,
               textAlign: TextAlign.center,
             ),

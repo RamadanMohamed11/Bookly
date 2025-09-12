@@ -1,28 +1,27 @@
+import 'package:bookly/core/utils/app_router.dart';
 import 'package:bookly/core/utils/styles.dart';
-import 'package:bookly/features/books/presentation/views/books_view.dart';
-import 'package:bookly/features/home/presentation/view_models/best_seller_model.dart';
+import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:go_router/go_router.dart';
 
 class BestSellerWidget extends StatelessWidget {
-  const BestSellerWidget({super.key, required this.bestSellerModel});
-  final BestSellerModel bestSellerModel;
+  const BestSellerWidget({super.key, required this.bookModel});
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(
-          () => BooksView(bestSellerModel: bestSellerModel),
-          transition: Transition.zoom,
-        );
+        GoRouter.of(context).push(AppRouter.kBooksView, extra: bookModel);
       },
       child: Row(
         children: [
           SizedBox(
             width: 70,
-            child: Image.asset(bestSellerModel.image, fit: BoxFit.fitHeight),
+            child: Image.network(
+              bookModel.volumeInfo.imageLinks.thumbnail,
+              fit: BoxFit.fitHeight,
+            ),
           ),
           SizedBox(width: 30),
 
@@ -32,30 +31,27 @@ class BestSellerWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  bestSellerModel.bookTitle,
+                  bookModel.volumeInfo.title,
                   style: Styles.gTsectraFineRegular20,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(width: 5),
-                Text(bestSellerModel.author, style: Styles.montserratMedium14),
+                Text(
+                  bookModel.volumeInfo.authors[0],
+                  style: Styles.montserratMedium14,
+                ),
                 SizedBox(width: 5),
                 Row(
                   children: [
-                    Text(bestSellerModel.price, style: Styles.montserratBold20),
+                    Text("price", style: Styles.montserratBold20),
                     Spacer(),
                     Icon(Icons.star, color: Color(0xffFFDD4F)),
                     SizedBox(width: 4.2),
-                    Text(
-                      bestSellerModel.rating,
-                      style: Styles.montserratMedium16,
-                    ),
+                    Text("rate", style: Styles.montserratMedium16),
                     SizedBox(width: 7),
 
-                    Text(
-                      bestSellerModel.reviews,
-                      style: Styles.montserratRegular14,
-                    ),
+                    Text("reviews", style: Styles.montserratRegular14),
                   ],
                 ),
               ],

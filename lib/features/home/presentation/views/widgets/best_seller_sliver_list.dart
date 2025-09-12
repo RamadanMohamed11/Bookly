@@ -20,11 +20,9 @@ class BestSellerSliverList extends StatelessWidget {
             delegate: SliverChildBuilderDelegate((context, index) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
-                child: BestSellerWidget(
-                  bestSellerModel: bestSellerModels[index],
-                ),
+                child: BestSellerWidget(bookModel: state.booksList[index]),
               );
-            }, childCount: bestSellerModels.length),
+            }, childCount: state.booksList.length),
           );
         } else if (state is NewestBooksFailure) {
           return SliverToBoxAdapter(
