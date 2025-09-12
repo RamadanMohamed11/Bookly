@@ -1,6 +1,7 @@
 import 'package:bookly/core/utils/assets_data.dart';
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/presentation/view_models/best_seller_model.dart';
+import 'package:bookly/features/home/presentation/views/widgets/best_seller_sliver_list.dart';
 import 'package:bookly/features/home/presentation/views/widgets/best_seller_widget.dart';
 import 'package:bookly/features/home/presentation/views/widgets/home_app_bar.dart';
 import 'package:bookly/features/home/presentation/views/widgets/horizontal_books_list_view_widget.dart';
@@ -49,9 +50,7 @@ class HomeViewBody extends StatelessWidget {
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
-                const SliverToBoxAdapter(
-                  child: HorizontalBooksListViewWidget(),
-                ),
+                const SliverToBoxAdapter(child: FeaturedBooksListViewWidget()),
                 const SliverToBoxAdapter(child: SizedBox(height: 50)),
                 SliverToBoxAdapter(
                   child: Text(
@@ -60,19 +59,7 @@ class HomeViewBody extends StatelessWidget {
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 15)),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    childCount: HomeViewBody.bestSellerModels.length,
-                    (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0),
-                        child: BestSellerWidget(
-                          bestSellerModel: HomeViewBody.bestSellerModels[index],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                BestSellerSliverList(bestSellerModels: bestSellerModels),
               ],
             ),
           ),
