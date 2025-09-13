@@ -5,6 +5,7 @@ import 'package:bookly/features/home/presentation/view_models/featured_books_cub
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:redacted/redacted.dart';
 
 class FeaturedBooksListViewWidget extends StatelessWidget {
   const FeaturedBooksListViewWidget({super.key});
@@ -13,17 +14,21 @@ class FeaturedBooksListViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
       builder: (context, state) {
-        if (state is FeaturedBooksSuccess) {
+        if (state is FeaturedBooksSuccess || state is FeaturedBooksLoading) {
           return SizedBox(
             height: 205,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               physics: const BouncingScrollPhysics(),
-              itemCount: state.books.length,
+              itemCount:
+                  state is FeaturedBooksSuccess ? state.books.length : 10,
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(
-                    right: state.books[index] != state.books.last ? 15 : 0,
+                    right:
+                        state is FeaturedBooksSuccess
+                            ? (state.books[index] != state.books.last ? 15 : 0)
+                            : (index != 9 ? 15 : 0),
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12),
@@ -35,13 +40,26 @@ class FeaturedBooksListViewWidget extends StatelessWidget {
                       // ),
                       child: CachedNetworkImage(
                         imageUrl:
-                            state.books[index].volumeInfo.imageLinks.thumbnail,
+                            state is FeaturedBooksSuccess
+                                ? state
+                                    .books[index]
+                                    .volumeInfo
+                                    .imageLinks
+                                    .thumbnail
+                                : '',
                         fit: BoxFit.fill,
 
                         errorWidget:
-                            (context, url, error) => Image.asset(
-                              AssetsData.defaultBook,
-                              fit: BoxFit.fill,
+                            (context, url, error) => Container(
+                              color: Colors.grey,
+                              width: 80,
+                              height: 110,
+                            ).redacted(
+                              context: context,
+                              redact: true,
+                              configuration: RedactedConfiguration(
+                                animationDuration: Duration(milliseconds: 450),
+                              ),
                             ),
                       ),
                     ),

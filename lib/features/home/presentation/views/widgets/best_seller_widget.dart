@@ -5,10 +5,11 @@ import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:redacted/redacted.dart';
 
 class BestSellerWidget extends StatelessWidget {
-  const BestSellerWidget({super.key, required this.bookModel});
-  final BookModel bookModel;
+  const BestSellerWidget({super.key, this.bookModel});
+  final BookModel? bookModel;
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +29,20 @@ class BestSellerWidget extends StatelessWidget {
               //   fit: BoxFit.fitHeight,
               // ),
               child: CachedNetworkImage(
-                imageUrl: bookModel.volumeInfo.imageLinks.thumbnail,
+                imageUrl: bookModel?.volumeInfo.imageLinks.thumbnail ?? '',
                 fit: BoxFit.fitHeight,
                 errorWidget:
-                    (context, url, error) =>
-                        Image.asset(AssetsData.defaultBook, fit: BoxFit.fill),
+                    (context, url, error) => Container(
+                      color: Colors.grey,
+                      width: 80,
+                      height: 110,
+                    ).redacted(
+                      context: context,
+                      redact: true,
+                      configuration: RedactedConfiguration(
+                        animationDuration: Duration(milliseconds: 450),
+                      ),
+                    ),
               ),
             ),
           ),
@@ -44,14 +54,14 @@ class BestSellerWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  bookModel.volumeInfo.title,
+                  bookModel?.volumeInfo.title ?? '',
                   style: Styles.gTsectraFineRegular20,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(width: 5),
                 Text(
-                  bookModel.volumeInfo.authors[0],
+                  bookModel?.volumeInfo.authors[0] ?? '',
                   style: Styles.montserratMedium14,
                 ),
                 SizedBox(width: 5),
@@ -62,13 +72,13 @@ class BestSellerWidget extends StatelessWidget {
                     Icon(Icons.star, color: Color(0xffFFDD4F)),
                     SizedBox(width: 4.2),
                     Text(
-                      bookModel.volumeInfo.averageRating?.toString() ?? "0",
+                      bookModel?.volumeInfo.averageRating?.toString() ?? "0",
                       style: Styles.montserratMedium16,
                     ),
                     SizedBox(width: 7),
 
                     Text(
-                      "(${bookModel.volumeInfo.ratingsCount?.toString() ?? "0"})",
+                      "(${bookModel?.volumeInfo.ratingsCount?.toString() ?? "0"})",
                       style: Styles.montserratRegular14,
                     ),
                   ],

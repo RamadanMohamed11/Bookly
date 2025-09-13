@@ -5,6 +5,7 @@ import 'package:bookly/features/home/presentation/view_models/newest_books_cubit
 import 'package:bookly/features/home/presentation/views/widgets/best_seller_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:redacted/redacted.dart';
 
 class BestSellerSliverList extends StatelessWidget {
   const BestSellerSliverList({super.key});
@@ -13,18 +14,33 @@ class BestSellerSliverList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NewestBooksCubit, NewestBooksState>(
       builder: (context, state) {
-        if (state is NewestBooksSuccess) {
+        if (state is NewestBooksSuccess || state is NewestBooksLoading) {
           return SliverList(
-            delegate: SliverChildBuilderDelegate((context, index) {
-              return Padding(
-                padding: const EdgeInsets.only(
-                  bottom: 20.0,
-                  left: 30,
-                  right: 30,
-                ),
-                child: BestSellerWidget(bookModel: state.booksList[index]),
-              );
-            }, childCount: state.booksList.length),
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return Padding(
+                  padding: const EdgeInsets.only(
+                    bottom: 20.0,
+                    left: 30,
+                    right: 30,
+                  ),
+                  child: BestSellerWidget(
+                    bookModel:
+                        state is NewestBooksSuccess
+                            ? state.booksList[index]
+                            : null,
+                  ).redacted(
+                    context: context,
+                    redact: state is NewestBooksLoading,
+                    configuration: RedactedConfiguration(
+                      animationDuration: Duration(milliseconds: 500),
+                    ),
+                  ),
+                );
+              },
+              childCount:
+                  state is NewestBooksSuccess ? state.booksList.length : 10,
+            ),
           );
         } else if (state is NewestBooksFailure) {
           return SliverToBoxAdapter(
