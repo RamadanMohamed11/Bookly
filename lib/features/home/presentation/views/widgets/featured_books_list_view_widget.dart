@@ -36,7 +36,7 @@ class FeaturedBooksListViewWidget extends StatelessWidget {
                       child: CachedNetworkImage(
                         imageUrl:
                             state.books[index].volumeInfo.imageLinks.thumbnail,
-                        fit: BoxFit.fitHeight,
+                        fit: BoxFit.fill,
 
                         errorWidget:
                             (context, url, error) => Image.asset(

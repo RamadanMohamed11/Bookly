@@ -61,10 +61,16 @@ class BestSellerWidget extends StatelessWidget {
                     Spacer(),
                     Icon(Icons.star, color: Color(0xffFFDD4F)),
                     SizedBox(width: 4.2),
-                    Text("rate", style: Styles.montserratMedium16),
+                    Text(
+                      bookModel.volumeInfo.averageRating?.toString() ?? "0",
+                      style: Styles.montserratMedium16,
+                    ),
                     SizedBox(width: 7),
 
-                    Text("reviews", style: Styles.montserratRegular14),
+                    Text(
+                      "(${bookModel.volumeInfo.ratingsCount?.toString() ?? "0"})",
+                      style: Styles.montserratRegular14,
+                    ),
                   ],
                 ),
               ],

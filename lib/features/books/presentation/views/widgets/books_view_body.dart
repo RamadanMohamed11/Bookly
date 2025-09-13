@@ -47,7 +47,10 @@ class BooksViewBody extends StatelessWidget {
             style: Styles.montserratMedium18,
           ),
           SizedBox(height: 17),
-          RateWidget(),
+          RateWidget(
+            rate: bookModel.volumeInfo.averageRating ?? 0,
+            reviews: bookModel.volumeInfo.ratingsCount ?? 0,
+          ),
           SizedBox(height: 52),
           PriceAndFreePreviewWidget(),
           SizedBox(height: 51),
