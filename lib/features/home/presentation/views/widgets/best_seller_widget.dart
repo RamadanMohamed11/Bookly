@@ -1,6 +1,8 @@
 import 'package:bookly/core/utils/app_router.dart';
+import 'package:bookly/core/utils/assets_data.dart';
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/data/models/book_model/book_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -21,9 +23,16 @@ class BestSellerWidget extends StatelessWidget {
             child: SizedBox(
               height: 110,
               width: 80,
-              child: Image.network(
-                bookModel.volumeInfo.imageLinks.thumbnail,
+              // child: Image.network(
+              //   bookModel.volumeInfo.imageLinks.thumbnail,
+              //   fit: BoxFit.fitHeight,
+              // ),
+              child: CachedNetworkImage(
+                imageUrl: bookModel.volumeInfo.imageLinks.thumbnail,
                 fit: BoxFit.fitHeight,
+                errorWidget:
+                    (context, url, error) =>
+                        Image.asset(AssetsData.defaultBook, fit: BoxFit.fill),
               ),
             ),
           ),
