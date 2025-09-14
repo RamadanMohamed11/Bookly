@@ -1,5 +1,6 @@
-import 'package:bookly/core/utils/styles.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/utils/styles.dart';
 
 class RateWidget extends StatelessWidget {
   const RateWidget({super.key, required this.rate, required this.reviews});

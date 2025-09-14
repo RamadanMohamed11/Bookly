@@ -1,11 +1,9 @@
-import 'package:bookly/core/utils/assets_data.dart';
-import 'package:bookly/core/widgets/custom_circular_progress_indicator.dart';
-import 'package:bookly/core/widgets/custom_error_widget.dart';
-import 'package:bookly/features/home/presentation/view_models/featured_books_cubit/featured_books_cubit.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import '../../../../../core/widgets/custom_circular_progress_indicator.dart';
+import '../../../../../core/widgets/custom_error_widget.dart';
+import '../../../../../core/widgets/horizontal_books_list_item.dart';
+import '../../view_models/featured_books_cubit/featured_books_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:redacted/redacted.dart';
 
 class FeaturedBooksListViewWidget extends StatelessWidget {
   const FeaturedBooksListViewWidget({super.key});
@@ -30,39 +28,11 @@ class FeaturedBooksListViewWidget extends StatelessWidget {
                             ? (state.books[index] != state.books.last ? 15 : 0)
                             : (index != 9 ? 15 : 0),
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12),
-                    child: SizedBox(
-                      width: 150,
-                      // child: Image.network(
-                      //   state.books[index].volumeInfo.imageLinks.thumbnail,
-                      //   fit: BoxFit.fitHeight,
-                      // ),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            state is FeaturedBooksSuccess
-                                ? state
-                                    .books[index]
-                                    .volumeInfo
-                                    .imageLinks
-                                    .thumbnail
-                                : '',
-                        fit: BoxFit.fill,
-
-                        errorWidget:
-                            (context, url, error) => Container(
-                              color: Colors.grey,
-                              width: 80,
-                              height: 110,
-                            ).redacted(
-                              context: context,
-                              redact: true,
-                              configuration: RedactedConfiguration(
-                                animationDuration: Duration(milliseconds: 450),
-                              ),
-                            ),
-                      ),
-                    ),
+                  child: HorizontalBooksListItem(
+                    imageUrl:
+                        state is FeaturedBooksSuccess
+                            ? state.books[index].volumeInfo.imageLinks.thumbnail
+                            : "",
                   ),
                 );
               },

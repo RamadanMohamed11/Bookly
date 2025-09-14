@@ -1,8 +1,8 @@
-import 'package:bookly/features/books/presentation/views/books_view.dart';
-import 'package:bookly/features/home/data/models/book_model/book_model.dart';
-import 'package:bookly/features/home/presentation/views/home_view.dart';
-import 'package:bookly/features/search/presentation/views/search_view.dart';
-import 'package:bookly/features/splash/presentation/views/splash_view.dart';
+import '../../features/book_details/presentation/views/books_view.dart';
+import '../../features/home/data/models/book_model/book_model.dart';
+import '../../features/home/presentation/views/home_view.dart';
+import '../../features/search/presentation/views/search_view.dart';
+import '../../features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {

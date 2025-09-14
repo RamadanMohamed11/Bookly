@@ -1,6 +1,6 @@
-import 'package:bookly/core/utils/styles.dart';
-import 'package:bookly/features/home/presentation/view_models/best_seller_model.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../../core/utils/styles.dart';
 
 class PriceAndFreePreviewWidget extends StatelessWidget {
   const PriceAndFreePreviewWidget({super.key});
