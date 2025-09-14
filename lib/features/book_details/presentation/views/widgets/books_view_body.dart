@@ -17,16 +17,19 @@ class BooksViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(30.0),
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            BookAppBar(),
-            SizedBox(height: 33.2),
-            SizedBox(
+    return SingleChildScrollView(
+      physics: const BouncingScrollPhysics(),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 30, left: 30, right: 30),
+            child: BookAppBar(),
+          ),
+          SizedBox(height: 33.2),
+          Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: SizedBox(
               width: 162,
               child: AspectRatio(
                 aspectRatio: 162 / 243,
@@ -41,88 +44,103 @@ class BooksViewBody extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 45),
-            Text(
+          ),
+          SizedBox(height: 45),
+          Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: Text(
               bookModel.volumeInfo.title,
               style: Styles.gTsectraFineRegular30,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 8),
-            bookModel.volumeInfo.authors != null
-                ? Text(
+          ),
+          SizedBox(height: 8),
+          bookModel.volumeInfo.authors != null
+              ? Padding(
+                padding: const EdgeInsets.only(left: 30, right: 30),
+                child: Text(
                   bookModel.volumeInfo.authors![0],
                   style: Styles.montserratMedium18,
-                )
-                : SizedBox(),
-            SizedBox(height: 17),
-            RateWidget(
+                ),
+              )
+              : SizedBox(),
+          SizedBox(height: 17),
+          Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: RateWidget(
               rate: bookModel.volumeInfo.averageRating ?? 0,
               reviews: bookModel.volumeInfo.ratingsCount ?? 0,
             ),
-            SizedBox(height: 52),
-            PriceAndFreePreviewWidget(),
-            SizedBox(height: 51),
-            Align(
+          ),
+          SizedBox(height: 52),
+          Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: PriceAndFreePreviewWidget(),
+          ),
+          SizedBox(height: 51),
+          Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: Align(
               alignment: AlignmentGeometry.centerLeft,
               child: Text(
                 "You can also like",
                 style: Styles.montserratSemiBold14,
               ),
             ),
-            SizedBox(height: 15),
-            SizedBox(
-              height: 205,
-              child: BlocBuilder<SimilarBooksCubit, SimilarBooksState>(
-                builder: (context, state) {
-                  if (state is SimilarBooksSuccess ||
-                      state is SimilarBooksLoading) {
-                    return ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(),
-                      itemCount:
-                          state is SimilarBooksSuccess
-                              ? state.booksList.length
-                              : 10,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: EdgeInsets.only(
-                            right:
-                                state is SimilarBooksSuccess
-                                    ? (state.booksList[index] !=
-                                            state.booksList.last
-                                        ? 15
-                                        : 0)
-                                    : (index != 9 ? 15 : 0),
-                          ),
-                          child: HorizontalBooksListItem(
-                            imageUrl:
-                                state is SimilarBooksSuccess
-                                    ? state
-                                        .booksList[index]
-                                        .volumeInfo
-                                        .imageLinks
-                                        .thumbnail
-                                    : "",
-                            bookModel:
-                                state is SimilarBooksSuccess
-                                    ? state.booksList[index]
-                                    : null,
-                          ),
-                        );
-                      },
-                    );
-                  } else if (state is SimilarBooksFailure) {
-                    return CustomErrorWidget(errorMessage: state.errorMessage);
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
+          ),
+          SizedBox(height: 15),
+          SizedBox(
+            height: 205,
+            child: BlocBuilder<SimilarBooksCubit, SimilarBooksState>(
+              builder: (context, state) {
+                if (state is SimilarBooksSuccess ||
+                    state is SimilarBooksLoading) {
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount:
+                        state is SimilarBooksSuccess
+                            ? state.booksList.length
+                            : 10,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: EdgeInsets.only(
+                          right:
+                              state is SimilarBooksSuccess
+                                  ? (state.booksList[index] !=
+                                          state.booksList.last
+                                      ? 15
+                                      : 0)
+                                  : (index != 9 ? 15 : 0),
+                        ),
+                        child: HorizontalBooksListItem(
+                          imageUrl:
+                              state is SimilarBooksSuccess
+                                  ? state
+                                      .booksList[index]
+                                      .volumeInfo
+                                      .imageLinks
+                                      .thumbnail
+                                  : "",
+                          bookModel:
+                              state is SimilarBooksSuccess
+                                  ? state.booksList[index]
+                                  : null,
+                        ),
+                      );
+                    },
+                  );
+                } else if (state is SimilarBooksFailure) {
+                  return CustomErrorWidget(errorMessage: state.errorMessage);
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
