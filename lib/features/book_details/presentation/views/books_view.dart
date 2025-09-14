@@ -4,7 +4,7 @@ import 'package:bookly/features/book_details/presentation/view_models/similar_bo
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'widgets/books_view_body.dart';
-import '../../../home/data/models/book_model/book_model.dart';
+import '../../../../core/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 
 class BooksView extends StatelessWidget {

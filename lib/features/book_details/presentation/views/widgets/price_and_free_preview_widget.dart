@@ -1,9 +1,12 @@
+import 'package:bookly/core/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../../core/utils/styles.dart';
 
 class PriceAndFreePreviewWidget extends StatelessWidget {
-  const PriceAndFreePreviewWidget({super.key});
+  const PriceAndFreePreviewWidget({super.key, required this.bookModel});
+  final BookModel bookModel;
 
   @override
   Widget build(BuildContext context) {
@@ -37,10 +40,22 @@ class PriceAndFreePreviewWidget extends StatelessWidget {
                 bottomRight: Radius.circular(12),
               ),
             ),
-            child: Text(
-              "Download",
-              style: Styles.gilroyBold16,
-              textAlign: TextAlign.center,
+            child: InkWell(
+              onTap: () async {
+                // launch book url
+                if (await canLaunchUrl(
+                  Uri.parse(bookModel.volumeInfo.previewLink ?? ''),
+                )) {
+                  await launchUrl(Uri.parse(bookModel.volumeInfo.previewLink!));
+                } else {
+                  throw 'Could not launch ${bookModel.volumeInfo.previewLink}';
+                }
+              },
+              child: Text(
+                "Preview",
+                style: Styles.gilroyBold16,
+                textAlign: TextAlign.center,
+              ),
             ),
           ),
         ),

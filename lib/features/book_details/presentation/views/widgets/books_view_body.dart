@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/styles.dart';
 import '../../../../../core/widgets/custom_error_widget.dart';
 import '../../../../../core/widgets/horizontal_books_list_item.dart';
-import '../../../../home/data/models/book_model/book_model.dart';
+import '../../../../../core/models/book_model/book_model.dart';
 import '../../view_models/similar_books_cubit/similar_books_cubit.dart';
 import 'book_app_bar.dart';
 import 'price_and_free_preview_widget.dart';
@@ -77,7 +77,7 @@ class BooksViewBody extends StatelessWidget {
           SizedBox(height: 52),
           Padding(
             padding: const EdgeInsets.only(left: 30, right: 30),
-            child: PriceAndFreePreviewWidget(),
+            child: PriceAndFreePreviewWidget(bookModel: bookModel),
           ),
           SizedBox(height: 51),
           Padding(

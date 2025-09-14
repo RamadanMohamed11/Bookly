@@ -1,6 +1,6 @@
 import '../../../../core/errors/failures.dart';
 import '../../../../core/utils/api_service.dart';
-import '../models/book_model/book_model.dart';
+import '../../../../core/models/book_model/book_model.dart';
 import 'home_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
