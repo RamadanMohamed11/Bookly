@@ -7,7 +7,7 @@ import 'reading_modes.dart';
 
 class VolumeInfo extends Equatable {
   final String title;
-  final List<dynamic> authors;
+  final List<dynamic>? authors;
   final String? publisher;
   final String? publishedDate;
   final String? description;
@@ -15,7 +15,7 @@ class VolumeInfo extends Equatable {
   final ReadingModes? readingModes;
   final int? pageCount;
   final String? printType;
-  final List<String> categories;
+  final List<String>? categories;
   final num? averageRating;
   final int? ratingsCount;
   final String? maturityRating;
@@ -30,7 +30,7 @@ class VolumeInfo extends Equatable {
 
   const VolumeInfo({
     required this.title,
-    required this.authors,
+    this.authors,
     this.publisher,
     this.publishedDate,
     this.description,
@@ -38,7 +38,7 @@ class VolumeInfo extends Equatable {
     this.readingModes,
     this.pageCount,
     this.printType,
-    required this.categories,
+    this.categories,
     this.averageRating,
     this.ratingsCount,
     this.maturityRating,
@@ -54,7 +54,8 @@ class VolumeInfo extends Equatable {
 
   factory VolumeInfo.fromJson(Map<String, dynamic> json) => VolumeInfo(
     title: json['title'] as String,
-    authors: (json['authors'] as List<dynamic>).cast<String>(),
+    authors:
+        json['authors'] is List ? List<String>.from(json['authors']) : null,
     publisher: json['publisher'] as String?,
     publishedDate: json['publishedDate'] as String?,
     description: json['description'] as String?,
@@ -70,7 +71,7 @@ class VolumeInfo extends Equatable {
             ),
     pageCount: json['pageCount'] as int?,
     printType: json['printType'] as String?,
-    categories: (json['categories'] as List<dynamic>).cast<String>(),
+    categories: (json['categories'] as List<dynamic>?)?.cast<String>(),
     averageRating: json['averageRating'],
     ratingsCount: json['ratingsCount'] as int?,
     maturityRating: json['maturityRating'] as String?,

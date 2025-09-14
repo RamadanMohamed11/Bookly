@@ -28,21 +28,24 @@ class BestSellerWidget extends StatelessWidget {
               //   bookModel.volumeInfo.imageLinks.thumbnail,
               //   fit: BoxFit.fitHeight,
               // ),
-              child: CachedNetworkImage(
-                imageUrl: bookModel?.volumeInfo.imageLinks.thumbnail ?? '',
-                fit: BoxFit.fitHeight,
-                errorWidget:
-                    (context, url, error) => Container(
-                      color: Colors.grey,
-                      width: 80,
-                      height: 110,
-                    ).redacted(
-                      context: context,
-                      redact: true,
-                      configuration: RedactedConfiguration(
-                        animationDuration: Duration(milliseconds: 450),
+              child: Hero(
+                tag: bookModel?.id ?? UniqueKey().toString(),
+                child: CachedNetworkImage(
+                  imageUrl: bookModel?.volumeInfo.imageLinks.thumbnail ?? '',
+                  fit: BoxFit.fitHeight,
+                  errorWidget:
+                      (context, url, error) => Container(
+                        color: Colors.grey,
+                        width: 80,
+                        height: 110,
+                      ).redacted(
+                        context: context,
+                        redact: true,
+                        configuration: RedactedConfiguration(
+                          animationDuration: Duration(milliseconds: 450),
+                        ),
                       ),
-                    ),
+                ),
               ),
             ),
           ),
@@ -60,10 +63,12 @@ class BestSellerWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 SizedBox(width: 5),
-                Text(
-                  bookModel?.volumeInfo.authors[0] ?? '',
-                  style: Styles.montserratMedium14,
-                ),
+                bookModel?.volumeInfo.authors != null
+                    ? Text(
+                      bookModel?.volumeInfo.authors![0],
+                      style: Styles.montserratMedium14,
+                    )
+                    : SizedBox(),
                 SizedBox(width: 5),
                 Row(
                   children: [

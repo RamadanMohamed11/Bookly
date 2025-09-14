@@ -17,8 +17,9 @@ class BooksView extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create:
-            (context) => SimilarBooksCubit(getIt.get<BookDetailsRepo>())
-              ..fetchSimilarBooks(category: bookModel.volumeInfo.categories[0]),
+            (context) => SimilarBooksCubit(
+              getIt.get<BookDetailsRepo>(),
+            )..fetchSimilarBooks(category: bookModel.volumeInfo.categories![0]),
         child: BooksViewBody(bookModel: bookModel),
       ),
     );

@@ -32,8 +32,11 @@ class BooksViewBody extends StatelessWidget {
                 aspectRatio: 162 / 243,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(12),
-                  child: CustomNetworkImage(
-                    imageUrl: bookModel.volumeInfo.imageLinks.thumbnail,
+                  child: Hero(
+                    tag: bookModel.id,
+                    child: CustomNetworkImage(
+                      imageUrl: bookModel.volumeInfo.imageLinks.thumbnail,
+                    ),
                   ),
                 ),
               ),
@@ -47,10 +50,12 @@ class BooksViewBody extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             SizedBox(height: 8),
-            Text(
-              bookModel.volumeInfo.authors[0],
-              style: Styles.montserratMedium18,
-            ),
+            bookModel.volumeInfo.authors != null
+                ? Text(
+                  bookModel.volumeInfo.authors![0],
+                  style: Styles.montserratMedium18,
+                )
+                : SizedBox(),
             SizedBox(height: 17),
             RateWidget(
               rate: bookModel.volumeInfo.averageRating ?? 0,
@@ -100,6 +105,10 @@ class BooksViewBody extends StatelessWidget {
                                         .imageLinks
                                         .thumbnail
                                     : "",
+                            bookModel:
+                                state is SimilarBooksSuccess
+                                    ? state.booksList[index]
+                                    : null,
                           ),
                         );
                       },

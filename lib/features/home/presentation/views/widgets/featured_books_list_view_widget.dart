@@ -33,6 +33,10 @@ class FeaturedBooksListViewWidget extends StatelessWidget {
                         state is FeaturedBooksSuccess
                             ? state.books[index].volumeInfo.imageLinks.thumbnail
                             : "",
+                    bookModel:
+                        state is FeaturedBooksSuccess
+                            ? state.books[index]
+                            : null,
                   ),
                 );
               },
