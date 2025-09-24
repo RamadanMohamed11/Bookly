@@ -27,7 +27,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   void navigateToHome() {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 4), () {
       // using router to navigate
       GoRouter.of(context).pushReplacement(AppRouter.kHomeView);
     });
@@ -41,11 +41,15 @@ class _SplashViewBodyState extends State<SplashViewBody>
     textSlidingAnimation = Tween<Offset>(
       begin: Offset(10, 0),
       end: Offset.zero,
-    ).animate(animationController);
+    ).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.easeInOut),
+    );
     imageSlidingAnimation = Tween<Offset>(
       begin: Offset(-10, 0),
       end: Offset.zero,
-    ).animate(animationController);
+    ).animate(
+      CurvedAnimation(parent: animationController, curve: Curves.easeInOut),
+    );
     animationController.forward();
   }
 

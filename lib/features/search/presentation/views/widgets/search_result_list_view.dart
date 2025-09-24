@@ -1,3 +1,4 @@
+import 'package:bookly/core/utils/assets_data.dart';
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/presentation/views/widgets/best_seller_widget.dart';
 import 'package:bookly/features/search/presentation/view_models/search_book_cubit/search_books_cubit.dart';
@@ -51,8 +52,15 @@ class SearchResultListView extends StatelessWidget {
         } else {
           return Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              SizedBox(
+                width: MediaQuery.of(context).size.width / 1.5,
+                child: AspectRatio(
+                  aspectRatio: 2.5,
+                  child: Image.asset(AssetsData.search, fit: BoxFit.cover),
+                ),
+              ),
+              SizedBox(height: 20),
               Center(
                 child: Text(
                   'Search for a book',
